@@ -7,7 +7,7 @@ public class CrearBasesDatos {
 		ProgressBar ventana=new ProgressBar();
 		ventana.setLocationRelativeTo(null);
 		ventana.setVisible(true);
-		
+		  
 	}
 
 }
