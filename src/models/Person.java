@@ -17,14 +17,14 @@ import java.util.regex.Pattern;
 
 public class Person {
 	private int id;
-	private String identification;
-	private String firstName;
-	private String lastName;
-	private char gender;
-	private String birthDate;
-	private String telephone;
+	private String cedula;
+	private String nombres;
+	private String apellidos;
+	private char genero;
+	private String telefono;
 	private String email;
 	private char status;
+	private int userId;
 	// para validar rango de numeros y letras
 	private Pattern patronLetras,patronCorreo;
 	private Matcher validarLetras,validarCorreo;
@@ -34,23 +34,22 @@ public class Person {
 	public Person() {
 		super();
 		patronLetras = Pattern.compile("[^A-Za-z. ]");
-		patronCorreo = Pattern.compile("[A-Za-z0isEmpty-9]+@[a-z]+\\.[a-z]+");
+		patronCorreo=Pattern.compile("[A-Za-z0-9]+@[a-z]+\\.[a-z]+");
 		funcion = new Funciones();
 	}
 	
 	
-	public Person(int id, String identification, String firstName, String lastName, char gender, String birthDate,
-			String telephone, String email, char status) {
+	public Person(int id, String cedula, String nombres, String apellidos, char genero, String fechaNacimiento,
+			String telefono, String email, char status) {
 		//super();
 		
 		funcion = new Funciones();
 		this.id = id;
-		this.identification = identification;
-		this.firstName = firstName;
-		this.lastName = lastName;
-		this.gender = gender;
-		this.birthDate = birthDate;
-		this.telephone = telephone;
+		this.cedula = cedula;
+		this.nombres = nombres;
+		this.apellidos = apellidos;
+		this.genero = genero;
+		this.telefono = telefono;
 		this.email = email;
 		this.status = status;
 		this.patronLetras = patronLetras;
@@ -69,68 +68,60 @@ public class Person {
 		this.id = id;
 	}
 
-	public boolean setIdentification(String identification) {
+	public boolean setCedula(String cedula) {
 		
-		if(identification.isEmpty()){
+		if(cedula.isEmpty()){
 			return false;
 		}
 		else{
-			this.identification=identification;
+			this.cedula=cedula;
 			return true;
 		}
 		
 	}
 
-	public boolean setFirstName(String firstName) {
+	public boolean setNombres(String nombres) {
 		
-		validarLetras = patronLetras.matcher(firstName.trim());	
-		if(firstName.isEmpty())
+		validarLetras = patronLetras.matcher(nombres.trim());	
+		if(nombres.isEmpty())
 			return false;
 		else if(!validarLetras.find()){
-			this.firstName = firstName.toUpperCase();
+			this.nombres = nombres.toUpperCase();
 			return true;
 		}
 		else
 			return false;
 	}
 
-	public boolean setLastName(String lastName) {
-		validarLetras = patronLetras.matcher(lastName.trim());	
-		if(lastName.isEmpty())
+	public boolean setApellidos(String apellidos) {
+		validarLetras = patronLetras.matcher(apellidos.trim());	
+		if(apellidos.isEmpty())
 			return false;
 		else if(!validarLetras.find()){
-			this.lastName = lastName.toUpperCase();
+			this.apellidos = apellidos.toUpperCase();
 			return true;
 		}
 		else
 			return false;
 	}
 
-	public boolean setGender(String value) {
-		char xGender = value.toUpperCase().charAt(0);
-		if(xGender == ' ')
+	public boolean setGenero(String value) {
+		char xgenero = value.toUpperCase().charAt(0);
+		if(xgenero == ' ')
 			return false;
 		else{
-			this.gender = xGender;
+			this.genero = xgenero;
 			return true;
 		}
 	}
 
-	public boolean setBirthDate(String birthDate) {
-		if(birthDate.isEmpty())
-			return false;
-		else{
-			this.birthDate=birthDate;
-			return true;
-		}
-	}
-
-	public boolean setTelephone(String telephone) {
 	
-		if(telephone.isEmpty())
+	public boolean setTelefono(String telefono) {
+	
+		if(telefono.isEmpty())
 			return false;
 		else{
-			this.telephone = telephone;
+			this.telefono = telefono;
 			return true;
 		}
 	}
@@ -150,38 +141,37 @@ public class Person {
 	public void setStatus(char status) {
 		this.status = status;
 	}
+	
+	public void setUserId(int userId){
+		this.userId = userId;
+	}
 
 	//-------->getter<----------------------
 	public int getId() {
 		return id;
 	}
 	//-------->getter<----------------------
-	public String getIdentification() {
-		return identification;
+	public String getCedula() {
+		return cedula;
 	}
 
-	public String getFirstName() {
-		return firstName;
+	public String getNombres() {
+		return nombres;
 	}
 
-	public String getLastName() {
-		return lastName;
+	public String getApellidos() {
+		return apellidos;
 	}
 
-	public String getGender() {
-		if(this.gender == 'F')
+	public String getGenero() {
+		if(this.genero == 'F')
 			return "Femenino";
 		else
 			return "Masculino";
 	}
 
-	public String getBirthDate() {
-		String xFecha = funcion.changeDateVen(birthDate);
-		return xFecha;
-	}
-
-	public String getTelephone(){
-		return telephone;
+	public String getTelefono(){
+		return telefono;
 	}
 
 	public String getEmail() {
@@ -191,21 +181,20 @@ public class Person {
 	public char getStatus() {
 		return status;
 	}
-	public int getAge(){
-		return (funcion.getAge(funcion.changeDateVen(birthDate)));
+	
+	public int getUserId(){
+		return this.userId;
 	}
 
 	@Override
 	public String toString() {
 		return "Persona :"
 				+ "\nid= " + getId()
-				+ "\nCedula= " + getIdentification()
-				+ "\nNombres=" + getFirstName()
-				+ "\nApellidos= " + getLastName()
-				+ "\nSexo= "+ getGender()
-				+"\nFecha Nacimiento= "+ getBirthDate()
-				+"\nEdad= "+ getAge()
-				+"\nTelefono= "+ getTelephone()
+				+ "\nCedula= " + getCedula()
+				+ "\nNombres=" + getNombres()
+				+ "\nApellidos= " + getApellidos()
+				+ "\nSexo= "+ getGenero()
+				+"\nTelefono= "+ getTelefono()
 				+"\nCorreo= " + getEmail() 
 				+"\nStatus= "+ getStatus();
 		

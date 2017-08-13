@@ -1,4 +1,4 @@
-package pruebas;
+package crearBaseDatos;
 
 import java.awt.BorderLayout;
 import java.awt.EventQueue;
@@ -6,8 +6,6 @@ import java.awt.EventQueue;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
-
-
 import javax.swing.JButton;
 import javax.swing.ImageIcon;
 import javax.swing.JTextField;
@@ -27,7 +25,7 @@ public class ProgressBar extends JFrame {
 	 * Create the frame.
 	 */
 	public ProgressBar() {
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		//setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 678, 372);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
@@ -48,7 +46,8 @@ public class ProgressBar extends JFrame {
 		contentPane.add(scrollPane);
 		
 		textInformacion = new JTextArea();
-		textInformacion.setColumns(10);
+		textInformacion.setEditable(false);
+		textInformacion.setColumns(9);
 		textInformacion.setRows(10);
 		scrollPane.setViewportView(textInformacion);
 		

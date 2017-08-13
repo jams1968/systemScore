@@ -13,10 +13,10 @@ public class Seeds {
 	}
 	
 	//-----------------------> Datos Persons <-------------------------
-	public void PersonsSeeder(){
+	public void PeopleSeeder(){
 		String sentenciaSql=
-				"INSERT INTO persons "
-				+	"(identification, firtsName,lastName,gender,telephone,email) VALUES"
+				"INSERT INTO people "
+				+	"(identification, first_name,last_name,gender,telephone,email) VALUES"
 				+	"(6331034,'JAIRO A.','MOLINA S.','M','0416-9421212','profesor@jairomolina.com.ve'),"
 				+ 	"(12345678,'JOSE L.','BERROTERAN N.','M','0416-9421212','jberroteran@unerg.edu.ve'),"
 				+ 	"(23456789,'JACKSON','GARCIA','M','0426-8548367','jgarcia@unerg.edu.ve'),"
@@ -95,7 +95,7 @@ public class Seeds {
 				+	"(code, departament,direction_id,person_id, status) VALUES"
 				+	"('1','CIENCIAS BASICAS',1,7,'A'),"	
 				+	"('2','ESTUDIOS GENERALES',1,8,'A'),"
-				+	"('3','CIENCIAS DE LA COMPUTACION',2,1,'A'),"
+				+	"('3','CIENCIAnPersonsS DE LA COMPUTACION',2,1,'A'),"
 				+	"('4','FORMACION PROFESIONAL',2,6,'A');";
 	
 		this.command.conection("notas","data.db");
@@ -174,7 +174,7 @@ public class Seeds {
 			"('IM4323', 'ESTRUCTURAS DISCRETAS I', 4, 4, 3, 2, 0,3, 1, 'A'),"+
 			"('IM4421', 'MATEMÁTICA IV', 4, 5, 2, 4, 0,4, 1, 'A'),"+
 			"('IM5221', 'ÁLGEBRA BOOLEANA', 5, 3, 2, 2, 0,5, 1, 'A'),"+
-			"('IM5323', 'ESTRUCTURAS DISCRETAS II', 5, 4, 3, 2, 0,6, 1, 'A'),"+
+			"('IM5323', 'ESTRUCTUnPersonsRAS DISCRETAS II', 5, 4, 3, 2, 0,6, 1, 'A'),"+
 			"('IM5421', 'PROBABILIDAD Y ESTADÍSTICA', 4, 3, 2, 2, 0,7, 1, 'A'),"+
 			"('IM6243', 'MÉTODOS NUMÉRICOS', 6, 4, 2, 4, 0,8, 1, 'A'),"+
 			"('IME320', 'ELECTIVA I', 2, 2, 2, 0, 0,1, 2, 'A'),"+
@@ -215,8 +215,10 @@ public class Seeds {
 					
 			String sentenciaSql=
 					"INSERT INTO professors "
-					+	"(username,password,person_id,status) VALUES"
-					+	"('jams', '"+encriptada+"', 1,'A');";
+					+	"(username,password,people_id,status) VALUES"
+					+	"('jams', '"+encriptada+"', 1,'A'),"
+					+	"('berro', '"+encriptada+"', 2,'A'),"
+					+	"('jackson', '"+encriptada+"', 3,'A');";
 		
 			
 			this.command.conection("notas","data.db");

@@ -1,4 +1,4 @@
-package pruebas;
+package crearBaseDatos;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -33,8 +33,8 @@ public class ControladorProgressBar implements ActionListener  {
 					//for(int i=0;i<=100;i++){
 						try {
 							vista.getJpanelProgress().ActualizarProgress(4);
-							tablas.tablePersons();
-							texto+="\nPersons";
+							tablas.tablePeople();
+							texto+="\nPeople";
 							vista.getTextInformacion().setText(texto);
 							Thread.sleep(50);
 							vista.getJpanelProgress().repaint();
@@ -142,7 +142,7 @@ public class ControladorProgressBar implements ActionListener  {
 							texto+="\n\nAlmacenando informacion precargada:";
 							Thread.sleep(100);
 							vista.getJpanelProgress().ActualizarProgress(64);
-							seeds.PersonsSeeder();
+							seeds.PeopleSeeder();
 							texto+="\nPersonas";
 							vista.getTextInformacion().setText(texto);
 							Thread.sleep(50);

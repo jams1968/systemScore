@@ -1,4 +1,4 @@
-package pruebas;
+package crearBaseDatos;
 
 import java.awt.Color;
 import java.awt.Font;

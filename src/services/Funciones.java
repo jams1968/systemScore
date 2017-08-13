@@ -18,7 +18,7 @@ import javax.swing.JOptionPane;
 public class Funciones {
 	
 	//----------> calculo de edad <-------------------
-	public int getAge(String fecha){
+	public int getEdad(String fecha){
 		int tiempo;
 		Calendar fechaActual = Calendar.getInstance();
 		SimpleDateFormat formato = new SimpleDateFormat("dd/MM/YYYY");

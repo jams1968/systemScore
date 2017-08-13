@@ -13,13 +13,13 @@ public class Migrations {
 	}
 
 	//-----------------> table Persons <-------------------------
-	public void tablePersons(){
+	public void tablePeople(){
 		String sentenciaSql=
-			"CREATE TABLE IF NOT EXISTS   persons("+
+			"CREATE TABLE IF NOT EXISTS   people("+
 					"id INTEGER PRIMARY KEY AUTOINCREMENT,"+
 					"identification varchar(20) NOT NULL UNIQUE,"+
-					"firtsName varchar(60) NOT NULL,"+
-					"lastName varchar(60) NOT NULL, "+
+					"first_name varchar(60) NOT NULL,"+
+					"last_name varchar(60) NOT NULL, "+
 					"gender varchar(1) NOT NULL DEFAULT NULL,"+
 					"telephone varchar(20),"+
 					"email varchar(60) NOT NULL UNIQUE,"+
@@ -222,9 +222,9 @@ public class Migrations {
 					"id INTEGER PRIMARY KEY AUTOINCREMENT,"+
 					"username varchar(20) NOT NULL UNIQUE,"+
 					"password varchar(20) NOT NULL,"+
-					"person_id integer NOT NULL,"+
+					"people_id integer NOT NULL,"+
 					"status varchar(1) NOT NULL DEFAULT 'A',"+
-					"FOREIGN KEY(person_id) REFERENCES persons(id));";
+					"FOREIGN KEY(people_id) REFERENCES people(id));";
 		
 		this.command.conection("notas","data.db");
 		if(this.command.sqlExecute(sentenciaSql))

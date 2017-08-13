@@ -6,6 +6,8 @@ import java.sql.SQLException;
 
 import javax.swing.JOptionPane;
 
+import crearBaseDatos.ProgressBar;
+
 
 
 public class DataBaseConection {
@@ -42,10 +44,13 @@ public class DataBaseConection {
 		//	urlDB = "jdbc:sqlite:"+funcion.getPath()+"/"+carpeta+"/"+nombreDB;
 		urlDB = "jdbc:sqlite:"+nombreDB;
 
+		
 			
-			/*if(!(funcion.checkFolder("notas") && funcion.checkFile("notas", "data.db")))
-				JOptionPane.showMessageDialog(null, "No existe la base datos, se creara");*/
-			
+			/*if(!funcion.checkFolder("notas") && !funcion.checkFile("notas", "data.db")){
+				JOptionPane.showMessageDialog(null, "No existe la base datos, se creara");
+				
+			}
+			*/
 			
 
 			boolean salida = false;
@@ -75,4 +80,13 @@ public class DataBaseConection {
 			}
 			return salida;
 		}
+		
+		public void ejecutar(){
+						
+			ProgressBar ventana=new ProgressBar();
+			ventana.setLocationRelativeTo(null);
+			ventana.setAlwaysOnTop(true);
+			ventana.setVisible(true);
+		}
+		
 }//fin clase

@@ -1,12 +1,11 @@
 package views;
 
-
 import javax.swing.UIManager;
 import javax.swing.UIManager.LookAndFeelInfo;
 
+import services.DataBaseConection;
 
-
-public class Pruebas {
+public class sistema {
 
 	public static void main(String[] args) {
 		try {
@@ -19,10 +18,10 @@ public class Pruebas {
 		} catch (Exception e) {
 		    // If Nimbus is not available, you can set the GUI to another look and feel.
 		}
-		//PantallaPrincipalView ventana = new PantallaPrincipalView();
-	//	ConfiguracionesView ventana = new ConfiguracionesView();
-		ProfesorView ventana = new ProfesorView();
-
+		DataBaseConection conectar = new DataBaseConection();
+		conectar.ejecutar();
+		PantallaPrincipalView vista= new PantallaPrincipalView();
+		
 	}
 
 }
