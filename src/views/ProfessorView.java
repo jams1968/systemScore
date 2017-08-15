@@ -33,6 +33,7 @@ import java.awt.Cursor;
 import java.awt.Dimension;
 
 import javax.swing.Box;
+import javax.swing.ButtonGroup;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.border.LineBorder;
@@ -47,13 +48,13 @@ import javax.swing.JPasswordField;
 import javax.swing.JScrollPane;
 import net.miginfocom.swing.MigLayout;
 import javax.swing.ScrollPaneConstants;
+import javax.swing.JRadioButton;
 
-public class ProfesorView extends JDialog {
+public class ProfessorView extends JDialog {
 	private JTextField textCedula;
 	private JTextField textNombres;
 	private JTextField textApellidos;
 	private JFormattedTextField textTelefono;
-	private JFormattedTextField textTelefono_1;
 	private JTextField textEmail;
 	private JTextField textUsuario;
 	private JPasswordField textClave;
@@ -71,13 +72,19 @@ public class ProfesorView extends JDialog {
 	private JButton btnCambioClave;
 	private JPanel panelMensajes;
 	private JLabel lblMensajes;
+	private JRadioButton rdbtnF;
+	private JRadioButton rdbtnM;
+	private JLabel lblG;
+	private JLabel lblClave;
+	private JLabel lblConfirmar;
+	private JPasswordField txtClave2;
 
 	
-	public ProfesorView() {
+	public ProfessorView() {
 		this.setUndecorated(true);
 		this.tablaProfesores=new JTable();
 		this.setSize(700,500);
-		getContentPane().setLayout(new MigLayout("", "[693px,grow]", "[24px][105px][68px][100px:240.00px,top][grow][][bottom]"));
+		getContentPane().setLayout(new MigLayout("", "[693px,grow]", "[24px][100px:105px,top][68px][100px:240.00px,top][::120px,grow,center][][bottom]"));
 		
 		JLabel lblTitulo = new JLabel("MODULO PROFESOR");
 		lblTitulo.setForeground(Color.BLUE);
@@ -90,7 +97,9 @@ public class ProfesorView extends JDialog {
 		panelPerson.setLayout(new GridLayout(2, 1, 0, 0));
 		
 		JPanel panelLinea1 = new JPanel();
+		panelLinea1.setAlignmentY(Component.TOP_ALIGNMENT);
 		FlowLayout flowLayout = (FlowLayout) panelLinea1.getLayout();
+		flowLayout.setVgap(1);
 		flowLayout.setAlignment(FlowLayout.LEFT);
 		panelPerson.add(panelLinea1);
 		
@@ -121,29 +130,52 @@ public class ProfesorView extends JDialog {
 		textApellidos.setColumns(12);
 		
 		JPanel panelLinea2 = new JPanel();
+		panelLinea2.setAlignmentY(Component.TOP_ALIGNMENT);
 		FlowLayout flowLayout_1 = (FlowLayout) panelLinea2.getLayout();
+		flowLayout_1.setVgap(1);
 		flowLayout_1.setAlignment(FlowLayout.LEFT);
 		panelPerson.add(panelLinea2);
+		
+		lblG = new JLabel("Género:");
+		lblG.setFont(new Font("DejaVu Sans", Font.BOLD, 12));
+		panelLinea2.add(lblG);
+		
+		rdbtnF = new JRadioButton("F");
+		panelLinea2.add(rdbtnF);
+		rdbtnF.setEnabled(false);
+		rdbtnF.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+		
+		rdbtnM = new JRadioButton("M");
+		panelLinea2.add(rdbtnM);
+		rdbtnM.setEnabled(false);
+		rdbtnM.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+		
+		ButtonGroup grupoGenero= new ButtonGroup();
+		grupoGenero.add(rdbtnF);
+		grupoGenero.add(rdbtnM);
+		
+
 		
 		JLabel lblTelefono = new JLabel("Telefono:");
 		lblTelefono.setFont(new Font("DejaVu Sans", Font.BOLD, 12));
 		panelLinea2.add(lblTelefono);
 		
-		textTelefono = new JFormattedTextField();
+		
 		MaskFormatter mascara;
+		textTelefono= new JFormattedTextField();
 		try {
 			mascara = new MaskFormatter("(####)-###-##-##");
 			mascara.setPlaceholderCharacter('_');
-			textTelefono_1= new JFormattedTextField(mascara);
-			textTelefono_1.setEditable(false);
-			textTelefono_1.setBounds(76, 83, 115, 26);
+			textTelefono= new JFormattedTextField(mascara);
+			textTelefono.setEditable(false);
+			textTelefono.setBounds(76, 83, 115, 26);
 			
-			textTelefono_1.setColumns(10);
+			textTelefono.setColumns(10);
 		} catch (ParseException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		panelLinea2.add(textTelefono_1);
+		panelLinea2.add(textTelefono);
 		
 		JLabel lblEmail = new JLabel("Email:");
 		lblEmail.setFont(new Font("DejaVu Sans", Font.BOLD, 12));
@@ -167,16 +199,30 @@ public class ProfesorView extends JDialog {
 		textUsuario = new JTextField();
 		textUsuario.setEditable(false);
 		panelUser.add(textUsuario);
-		textUsuario.setColumns(10);
+		textUsuario.setColumns(8);
 		
-		JLabel lblClave = new JLabel("Contraseña:");
+		lblClave = new JLabel("Contraseña:");
 		lblClave.setFont(new Font("DejaVu Sans", Font.BOLD, 12));
 		panelUser.add(lblClave);
+	
 		
 		textClave = new JPasswordField();
 		textClave.setEditable(false);
-		textClave.setColumns(10);
+		textClave.setColumns(8);
 		panelUser.add(textClave);
+		
+		lblClave.setEnabled(false);
+		textClave.setEnabled(false);
+		
+		lblConfirmar = new JLabel("Confirmar Contraseña:");
+		lblConfirmar.setEnabled(false);
+		lblConfirmar.setFont(new Font("DejaVu Sans", Font.BOLD, 12));
+		panelUser.add(lblConfirmar);
+		
+		txtClave2 = new JPasswordField();
+		txtClave2.setEnabled(false);
+		txtClave2.setColumns(8);
+		panelUser.add(txtClave2);
 		
 		JPanel panelTabla = new JPanel();
 		panelTabla.setBorder(new TitledBorder(null, "Profesores Registrados", TitledBorder.LEFT, TitledBorder.TOP, null, Color.BLUE));
@@ -188,7 +234,7 @@ public class ProfesorView extends JDialog {
 		
 		//scrollPaneTabla.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_ALWAYS);
 		scrollPaneTabla.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
-		scrollPaneTabla.setSize(550,100);
+		//scrollPaneTabla.setSize(550,100);
 		
 		//scrollPaneTabla.setBounds(98, 25, 556, 100);
 		//panelTabla.setPreferredSize(new Dimension(550,100));
@@ -211,39 +257,39 @@ public class ProfesorView extends JDialog {
 		getContentPane().add(panelBotones, "cell 0 6,growx,aligny top");
 		
 		btnAgregar = new JButton("");
-		btnAgregar.setIcon(new ImageIcon(ProfesorView.class.getResource("/iconos/iconos_32x32/plus.png")));
+		btnAgregar.setIcon(new ImageIcon(ProfessorView.class.getResource("/iconos/iconos_32x32/plus.png")));
 		btnAgregar.setToolTipText("Registrar Nuevo Profesor");
 		btnAgregar.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		panelBotones.add(btnAgregar);
 		
 		btnModificar = new JButton("");
 		btnModificar.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
-		btnModificar.setIcon(new ImageIcon(ProfesorView.class.getResource("/iconos/iconos_32x32/edit.png")));
+		btnModificar.setIcon(new ImageIcon(ProfessorView.class.getResource("/iconos/iconos_32x32/edit.png")));
 		btnModificar.setToolTipText("Modifcar Datos del Profesor");
 		panelBotones.add(btnModificar);
 		
 		btnEliminar = new JButton("");
 		btnEliminar.setToolTipText("Eliminar Profesor");
 		btnEliminar.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
-		btnEliminar.setIcon(new ImageIcon(ProfesorView.class.getResource("/iconos/iconos_32x32/busy.png")));
+		btnEliminar.setIcon(new ImageIcon(ProfessorView.class.getResource("/iconos/iconos_32x32/busy.png")));
 		panelBotones.add(btnEliminar);
 		
 		btnCambioClave = new JButton("");
 		btnCambioClave.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		btnCambioClave.setToolTipText("Cambio de contrase\u00F1a");
-		btnCambioClave.setIcon(new ImageIcon(ProfesorView.class.getResource("/iconos/iconos_32x32/cambioPassword.png")));
+		btnCambioClave.setIcon(new ImageIcon(ProfessorView.class.getResource("/iconos/iconos_32x32/cambioPassword.png")));
 		panelBotones.add(btnCambioClave);
 		
 		btnVaciar = new JButton("");
 		btnVaciar.setToolTipText("Vaciar campos del formulario");
-		btnVaciar.setIcon(new ImageIcon(ProfesorView.class.getResource("/iconos/iconos_32x32/arrow_refresh.png")));
+		btnVaciar.setIcon(new ImageIcon(ProfessorView.class.getResource("/iconos/iconos_32x32/arrow_refresh.png")));
 		btnVaciar.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		panelBotones.add(btnVaciar);
 		
 		btnRetornar = new JButton("");
 		btnRetornar.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		btnRetornar.setToolTipText("Retornar a Pantalla Principal");
-		btnRetornar.setIcon(new ImageIcon(ProfesorView.class.getResource("/iconos/iconos_32x32/arrow_turn_left.png")));
+		btnRetornar.setIcon(new ImageIcon(ProfessorView.class.getResource("/iconos/iconos_32x32/arrow_turn_left.png")));
 		panelBotones.add(btnRetornar);
 		
 		llenarTabla();
@@ -252,6 +298,31 @@ public class ProfesorView extends JDialog {
 		this.setAlwaysOnTop(true);
 		
 		this.setVisible(true);
+		
+		//--------->enlaces<------------
+		ProfessorController eco = new ProfessorController(this);
+		btnRetornar.addActionListener(eco);
+		rdbtnF.addActionListener(eco);
+		rdbtnM.addActionListener(eco);
+		
+		textCedula.addKeyListener(eco);
+		textNombres.addKeyListener(eco);
+		textApellidos.addKeyListener(eco);
+		textTelefono.addKeyListener(eco);
+		textEmail.addKeyListener(eco);
+		textUsuario.addKeyListener(eco);
+		textClave.addKeyListener(eco);
+		txtClave2.addKeyListener(eco);
+		
+		textCedula.addFocusListener(eco);
+		textNombres.addFocusListener(eco);
+		textApellidos.addFocusListener(eco);
+		rdbtnF.addFocusListener(eco);
+		rdbtnM.addFocusListener(eco);
+		textTelefono.addFocusListener(eco);
+		textEmail.addFocusListener(eco);
+		textUsuario.addFocusListener(eco);
+
 
 	}//fin constructor
 	
@@ -297,9 +368,7 @@ public class ProfesorView extends JDialog {
 		
 		
 		
-		//--------->enlaces<------------
-		ProfessorController eco = new ProfessorController(this);
-		btnRetornar.addActionListener(eco);
+		
 	}//fin llenar tabla
 
 	public JTextField getTextCedula() {
@@ -314,9 +383,7 @@ public class ProfesorView extends JDialog {
 		return textApellidos;
 	}
 
-	public JFormattedTextField getTextTelefono() {
-		return textTelefono_1;
-	}
+	
 
 	public JTextField getTextEmail() {
 		return textEmail;
@@ -368,6 +435,43 @@ public class ProfesorView extends JDialog {
 
 	public JButton getBtnCambioClave() {
 		return btnCambioClave;
+	}
+
+	
+	public JScrollPane getScrollPaneTabla() {
+		return scrollPaneTabla;
+	}
+
+	public JPanel getPanelMensajes() {
+		return panelMensajes;
+	}
+
+	public JLabel getLblMensajes() {
+		return lblMensajes;
+	}
+
+	public JRadioButton getRdbtnF() {
+		return rdbtnF;
+	}
+
+	public JRadioButton getRdbtnM() {
+		return rdbtnM;
+	}
+
+	public JFormattedTextField getTextTelefono() {
+		return textTelefono;
+	}
+
+	public JLabel getLblClave() {
+		return lblClave;
+	}
+
+	public JLabel getLblConfirmar() {
+		return lblConfirmar;
+	}
+
+	public JPasswordField getTxtClave2() {
+		return txtClave2;
 	}
 	
 	

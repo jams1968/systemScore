@@ -7,7 +7,7 @@ import javax.swing.JOptionPane;
 
 import views.ConfiguracionesView;
 import views.PantallaPrincipalView;
-import views.ProfesorView;
+import views.ProfessorView;
 
 public class PantallaPrincipalController implements ActionListener{
 
@@ -21,7 +21,7 @@ public class PantallaPrincipalController implements ActionListener{
 				accion.getSource().equals(vista.getAyudaSalir()))))
 			salirSistema();
 		else if(accion.getSource().equals(vista.getMenuProfesor()))
-			new ProfesorView();
+			new ProfessorView();
 		
 		else if(accion.getSource().equals(vista.getMenuConfiguraciones()))
 			new ConfiguracionesView();

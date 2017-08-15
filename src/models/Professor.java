@@ -77,7 +77,7 @@ public class Professor extends Person {
 		if(password.isEmpty())
 			return false;
 		else {
-			this.password = funcion.encrypt(password);
+			this.password = password;
 			return true;
 		}
 	}
@@ -121,8 +121,6 @@ public class Professor extends Person {
 				this.setEmail(consulta.getString(12).trim());
 				this.setStatus(consulta.getString(13).trim().charAt(0));
 				
-				
-				
 			}
 		} catch (Exception e) {
 			
@@ -135,11 +133,11 @@ public class Professor extends Person {
 		else 
 			return true;
 		
-	}
+	}//fin read cedula
 	//---------->read username<--DefaultTableModel model-----------
 	public boolean readUsername(){
 				
-		String sentenciaSql = "select * from professors A join people B on A.people_id = B.id where identification ='"+ 
+		String sentenciaSql = "select * from professors A join people B on A.people_id = B.id where username ='"+ 
 				this.getUsername()+"'";
 		
 		SqlComands command = new SqlComands();
@@ -179,12 +177,10 @@ public class Professor extends Person {
 		else 
 			return true;
 		
-	}
+	}//fin read username
 	//---------->read tabla profesores<-------------
 	public void readTable(DefaultTableModel model){
-		
-	
-				
+			
 		String sentenciaSql = "select * from professors A join people B on A.people_id = B.id ";
 		
 		SqlComands command = new SqlComands();
@@ -235,7 +231,49 @@ public class Professor extends Person {
 		
 	
 		
+	}//fin model tabla
+	
+//---------------------> guardar registro <-------------------
+public boolean Create(){
+	
+
+	String sentenciaSql="INSERT INTO people (identification,first_name,last_name,gender,telephone,email) "
+			+ "VALUES ('"+this.getCedula()+"','"+this.getNombres()+"','"
+					+ this.getApellidos()+"','"+this.getGenero()+"','"+this.getTelefono()+"','"
+					+this.getEmail()+"')";
+	SqlComands command = new SqlComands();
+	command.conection("notas","data.db");
+	
+	if(!command.sqlExecute(sentenciaSql)){
+		command.disconnect();
+		return false;
 	}
+		
+	sentenciaSql = "SELECT MAX(id) from people;";
+	
+	ResultSet consulta = command.sqlRecordQuery(sentenciaSql);
+	try {
+		
+		while(consulta.next()){
+			this.setPeopleId(consulta.getInt(1));
+		}
+	} catch (Exception e) {
+		
+	}
+	
+	sentenciaSql="INSERT INTO professors (username,password,people_id,status) "
+			+ "VALUES ('"+this.getUsername()+"','"+this.getPassword()+"',"
+					+ this.getPeopleid()+",'A')";
+	if(command.sqlExecute(sentenciaSql)){
+		command.disconnect();
+		return true;
+		
+	}
+	else{
+		command.disconnect();
+		return false;
+	}
+}
 		
 	
 	@Override

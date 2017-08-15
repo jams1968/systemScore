@@ -26,8 +26,8 @@ public class Person {
 	private char status;
 	private int userId;
 	// para validar rango de numeros y letras
-	private Pattern patronLetras,patronCorreo;
-	private Matcher validarLetras,validarCorreo;
+	private Pattern patronLetras,patronCorreo,patronNumeros,patronTelefono;
+	private Matcher validarLetras,validarCorreo,validarNumeros,validarTelefono;
 	private Funciones funcion;
 	
 	//-------------------> constructor<---------------------
@@ -35,6 +35,8 @@ public class Person {
 		super();
 		patronLetras = Pattern.compile("[^A-Za-z. ]");
 		patronCorreo=Pattern.compile("[A-Za-z0-9]+@[a-z]+\\.[a-z]+");
+		patronNumeros= Pattern.compile("[^0-9]");
+		patronTelefono=Pattern.compile("");
 		funcion = new Funciones();
 	}
 	
@@ -69,14 +71,16 @@ public class Person {
 	}
 
 	public boolean setCedula(String cedula) {
-		
+		validarNumeros = patronNumeros.matcher(cedula.trim());
 		if(cedula.isEmpty()){
 			return false;
 		}
-		else{
+		else if(!validarNumeros.find()){
 			this.cedula=cedula;
 			return true;
 		}
+		else
+			return false;
 		
 	}
 
@@ -117,13 +121,14 @@ public class Person {
 
 	
 	public boolean setTelefono(String telefono) {
-	
+		validarNumeros = patronNumeros.matcher(telefono.trim());
 		if(telefono.isEmpty())
 			return false;
-		else{
-			this.telefono = telefono;
+		else if(validarNumeros.find()){
+			this.telefono=telefono;
 			return true;
-		}
+		}else
+			return false;
 	}
 
 	public boolean setEmail(String email) {

@@ -21,7 +21,7 @@ public class Pruebas {
 		}
 		//PantallaPrincipalView ventana = new PantallaPrincipalView();
 	//	ConfiguracionesView ventana = new ConfiguracionesView();
-		ProfesorView ventana = new ProfesorView();
+		ProfessorView ventana = new ProfessorView();
 
 	}
 
